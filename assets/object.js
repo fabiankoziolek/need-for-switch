@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 export class Object {
-  constructor(x, y, width, height, rotation, context) {
+  constructor(x, y, width, height, context, color = 'black', rotation = 0) {
     this.x = x;
     this.y = y;
     this.width = width;

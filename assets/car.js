@@ -3,8 +3,8 @@
 import { Object } from './object.js'
 
 export class Car extends Object {
-  constructor(x, y, fill, context) {
-    super(x, y, 30, 50, 0, context);
+  constructor(x, y, context, color) {
+    super(x, y, 30, 50, context, color);
     this.acceleration = 1.08;
     this.breakPower = 0.05;
     this.speed = 0;
@@ -13,7 +13,6 @@ export class Car extends Object {
     this.maxBackSpeed = 2;
     this.speedDecay = 0.96;
     this.rotationStep = 4;
-    this.fill = fill;
   }
 
   isMoving() {
@@ -82,7 +81,7 @@ export class Car extends Object {
   }
 
   draw(x, y) {
-    this.context.fillStyle = this.fill;
+    this.context.fillStyle = this.color;
     this.context.fillRect(x, y, this.width, this.height);
   }
 }
