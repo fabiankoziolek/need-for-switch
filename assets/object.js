@@ -6,7 +6,8 @@ export class Object {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.rotation = rotation;
     this.context = context;
+    this.color = color;
+    this.rotation = rotation;
   }
 }
