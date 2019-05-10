@@ -1,8 +1,8 @@
 'use strict';
 
-import { Object } from './object.js'
+import { ColiderObject } from "./colider-object.js";
 
-export class Car extends Object {
+export class Car extends ColiderObject {
   constructor(x, y, context, color) {
     super(x, y, 30, 50, context, color);
     this.acceleration = 1.08;
@@ -80,25 +80,25 @@ export class Car extends Object {
       this.speed *= this.speedDecay;
     }
 
-    const axis = this.getAxis();
+    const axis = this._getAxis();
     this.x += axis.x;
     this.y += axis.y;
 
     this.context.save();
     this.context.translate(this.x + this.width / 2, this.y + this.height / 2);
     this.context.rotate(this.rotation * (Math.PI / 180));
-    this.draw(-this.width / 2, -this.height / 2);
+    this._draw(-this.width / 2, -this.height / 2);
     this.context.restore();
   }
 
-  getAxis() {
+  _getAxis() {
     return {
       x: Math.sin(this.rotation * (Math.PI / 180)) * this.speed,
       y: Math.cos(this.rotation * (Math.PI / 180)) * this.speed * -1,
     };
   }
 
-  draw(x, y) {
+  _draw(x, y) {
     this._drawWheels(x, y);
     this.context.fillStyle = this.color;
     this.context.fillRect(x, y, this.width, this.height);

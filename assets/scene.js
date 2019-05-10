@@ -28,7 +28,7 @@ export class Scene {
 
   start(actionListener) {
     this.loop = setInterval(() => {
-      this.clear();
+      this._clear();
       this.update();
       actionListener();
       this.objects.forEach(x => x.update());
@@ -37,20 +37,20 @@ export class Scene {
 
   update() {
     this.context.save();
-    this.draw();
+    this._draw();
     this.context.restore();
-  }
-
-  draw() {
-    this.context.fillStyle = 'green';
-    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  clear() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   stop() {
     clearInterval(this.loop);
+  }
+
+  _draw() {
+    this.context.fillStyle = '#efefef';
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  _clear() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }

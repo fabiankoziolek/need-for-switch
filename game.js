@@ -10,44 +10,29 @@ scene.objects.push(car1);
 scene.objects.push(car2);
 
 scene.start(() => {
-  if (scene.pressedKeys['ArrowLeft']) {
-    car1.steerLeft();
-  } else {
-    car1.stopSteerLeft();
-  }
-
-  if (scene.pressedKeys['ArrowRight']) {
-    car1.steerRight();
-  } else {
-    car1.stopSteerRight();
-  }
-
-  if (scene.pressedKeys['ArrowUp']) {
-    car1.accelerate();
-  }
-
-  if (scene.pressedKeys['ArrowDown']) {
-    car1.decelerate();
-  }
-
-  if (scene.pressedKeys['a']) {
-    car2.steerLeft();
-  } else {
-    car2.stopSteerLeft();
-  }
-
-  if (scene.pressedKeys['d']) {
-    car2.steerRight();
-  } else {
-    car2.stopSteerRight();
-  }
-
-  if (scene.pressedKeys['w']) {
-    car2.accelerate();
-  }
-
-  if (scene.pressedKeys['s']) {
-    car2.decelerate();
-  }
+  controlCar(car1, 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown');
+  controlCar(car2, 'a', 'd', 'w', 's');
 });
+
+function controlCar(car, leftKey, rightKey, accelerateKey, decelerateKey) {
+  if (scene.pressedKeys[leftKey]) {
+    car.steerLeft();
+  } else {
+    car.stopSteerLeft();
+  }
+
+  if (scene.pressedKeys[rightKey]) {
+    car.steerRight();
+  } else {
+    car.stopSteerRight();
+  }
+
+  if (scene.pressedKeys[accelerateKey]) {
+    car.accelerate();
+  }
+
+  if (scene.pressedKeys[decelerateKey]) {
+    car.decelerate();
+  }
+}
 
