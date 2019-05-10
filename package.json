@@ -1,0 +1,22 @@
+{
+  "name": "need-for-switch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafalschmidt97/need-for-switch.git"
+  },
+  "author": "Rafał Schmidt",
+  "bugs": {
+    "url": "https://github.com/rafalschmidt97/need-for-switch/issues"
+  },
+  "homepage": "https://github.com/rafalschmidt97/need-for-switch#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
