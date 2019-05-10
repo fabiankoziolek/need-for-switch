@@ -150,3 +150,25 @@ export class Car extends ColiderObject {
     this.context.fillRect(x + 2, y + 23, this.width - 4, 12);
   }
 }
+
+export function setControls(car, scene, leftKey, rightKey, accelerateKey, decelerateKey) {
+  if (scene.pressedKeys[leftKey]) {
+    car.steerLeft();
+  } else {
+    car.stopSteerLeft();
+  }
+
+  if (scene.pressedKeys[rightKey]) {
+    car.steerRight();
+  } else {
+    car.stopSteerRight();
+  }
+
+  if (scene.pressedKeys[accelerateKey]) {
+    car.accelerate();
+  }
+
+  if (scene.pressedKeys[decelerateKey]) {
+    car.decelerate();
+  }
+}
