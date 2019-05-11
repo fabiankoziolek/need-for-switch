@@ -1,18 +1,18 @@
 'use strict';
 
-import { ColiderObject } from "./colider-object.js";
+import { ColliderObject } from "./collider-object.js";
 
-export class Car extends ColiderObject {
-  constructor(x, y, context, color) {
-    super(x, y, 30, 50, context, color);
+export class Car extends ColliderObject {
+  constructor(x, y, context, objects, color) {
+    super(x, y, 30, 50, context, objects, color, 0);
     this.acceleration = 1.08;
     this.breakPower = 0.05;
     this.speed = 0;
     this.initialSpeed = 0.5;
-    this.maxSpeed = 8;
+    this.maxSpeed = 12;
     this.maxBackSpeed = 2;
     this.speedDecay = 0.96;
-    this.rotationStep = 4;
+    this.rotationStep = 8;
     this.steeringLeft = false;
     this.steeringRight = false;
   }
@@ -74,21 +74,22 @@ export class Car extends ColiderObject {
   }
 
   update() {
-    if (!this.isMoving()) {
-      this.speed = 0;
+    const objectsWithoutCars = this.objects.filter(x => !(x instanceof Car));
+    if (this.isCollidingMany(this, objectsWithoutCars)) {
+      this.speed = -this.speed;
     } else {
-      this.speed *= this.speedDecay;
+      if (!this.isMoving()) {
+        this.speed = 0;
+      } else {
+        this.speed *= this.speedDecay;
+      }
     }
 
     const axis = this._getAxis();
     this.x += axis.x;
     this.y += axis.y;
 
-    this.context.save();
-    this.context.translate(this.x + this.width / 2, this.y + this.height / 2);
-    this.context.rotate(this.rotation * (Math.PI / 180));
-    this._draw(-this.width / 2, -this.height / 2);
-    this.context.restore();
+    super.update();
   }
 
   _getAxis() {
