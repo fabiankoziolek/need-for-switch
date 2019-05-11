@@ -74,8 +74,10 @@ export class Car extends ColliderObject {
   }
 
   update() {
-    const objectsWithoutCars = this.objects.filter(x => !(x instanceof Car));
-    if (this.isCollidingMany(this, objectsWithoutCars)) {
+    const collidingObjectsWithoutSelfAndCars =
+      this.objects.filter(x => !(x instanceof Car) && (x instanceof ColliderObject));
+
+    if (this.isCollidingManyWithSelf(collidingObjectsWithoutSelfAndCars)) {
       this.speed = -this.speed;
     } else {
       if (!this.isMoving()) {

@@ -37,8 +37,8 @@ export class ColliderObject extends Object {
   }
 
   isCollidingAll(collider) {
-    const objectsWithoutSelf = this.objects.filter(x => x.id !== collider.id);
-    return this.isCollidingMany(collider, objectsWithoutSelf);
+    const collidingObjectsWithoutSelf = this.objects.filter(x => x.id !== collider.id && x instanceof ColliderObject);
+    return this.isCollidingMany(collider, collidingObjectsWithoutSelf);
   }
 
   isCollidingAllWithSelf() {
