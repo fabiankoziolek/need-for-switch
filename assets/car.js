@@ -5,8 +5,9 @@ import { Coin } from "./coin.js";
 import { removeItemByValue } from "./utils.js";
 
 export class Car extends ColliderObject {
-  constructor(x, y, context, objects, color) {
-    super(x, y, 30, 50, context, objects, color, 0);
+  constructor(x, y, context, objects, player) {
+    super(x, y, 30, 50, context, objects, player.color, 0);
+    this.player = player;
     this.acceleration = 1.08;
     this.breakPower = 0.05;
     this.speed = 0;
@@ -95,7 +96,7 @@ export class Car extends ColliderObject {
     for (let i = 0; i < collidingCoins.length; i++) {
       // TODO: hide instead of removing instantly. Then add a scheduler to remove hidden
       removeItemByValue(this.objects, collidingCoins[i]);
-      // TODO: add to score
+      this.player.score = this.player.score + 1;
     }
 
     const axis = this._getAxis();

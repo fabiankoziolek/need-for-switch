@@ -4,8 +4,25 @@ import { Scene } from './assets/scene.js'
 import { Car, setControls } from './assets/car.js'
 import { ColliderObject } from "./assets/collider-object.js";
 import { Coin } from "./assets/coin.js";
+import { Hud } from "./assets/hud.js";
+import { generateRandomId } from "./assets/utils.js";
 
 const scene = new Scene(800, 800);
+const players = [
+  {
+    id: generateRandomId(),
+    color: '#eb0019',
+    score: 0,
+  },
+  {
+    id: generateRandomId(),
+    color: '#287ee8',
+    score: 0,
+  }
+];
+
+const hud = new Hud(players, scene.context);
+scene.objects.push(hud);
 
 const wallTop = new ColliderObject(10, 10, scene.canvas.width - 20, 10, scene.context);
 scene.objects.push(wallTop);
@@ -23,9 +40,9 @@ scene.objects.push(coin2);
 const coin3 = new Coin(600, 100, scene.context);
 scene.objects.push(coin3);
 
-const car1 = new Car(150, 500, scene.context, scene.objects, '#eb0019');
+const car1 = new Car(150, 500, scene.context, scene.objects, players[0]);
 scene.objects.push(car1);
-const car2 = new Car(600, 500, scene.context, scene.objects, '#287ee8');
+const car2 = new Car(600, 500, scene.context, scene.objects, players[1]);
 scene.objects.push(car2);
 
 scene.start(() => {
