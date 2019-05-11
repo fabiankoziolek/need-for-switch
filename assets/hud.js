@@ -11,6 +11,10 @@ export class Hud extends Object {
 
   _draw(x, y) {
     this._drawTimer(x, y);
+    this._drawPlayersScore(x, y);
+  }
+
+  _drawPlayersScore(x, y) {
     this.context.font = "40px Arial";
     this.context.fillStyle = this.players[0].color;
     const playerOneScore = !isNullOrUndefined(this.players[0]) ? this.players[0].score : 0;
