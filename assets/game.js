@@ -1,6 +1,7 @@
 'use strict';
 
 import { Hud } from "./hud.js";
+import { Coins } from "./coins.js";
 
 export class Game {
   constructor(players, scene, countdown) {
@@ -27,12 +28,17 @@ export class Game {
     this.scene.start(actionListener);
 
     const timer = setInterval(() => {
-      if (this.countdown > 10) {
-        this.countdown = this.countdown - 1;
-      } else if (this.countdown <= 10 && this.countdown > 0) {
-        this.countdown = `0${this.countdown - 1}`;
+      if (this.countdown > 0) {
+        this.scene.addObject(Coins.generateCoin(this.scene.context));
+
+        if (this.countdown > 10) {
+          this.countdown = this.countdown - 1;
+        } else {
+          this.countdown = `0${this.countdown - 1}`;
+        }
       } else {
         clearInterval(timer);
+        this.scene.stop();
       }
     }, 1000);
   }

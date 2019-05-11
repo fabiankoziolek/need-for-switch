@@ -16,10 +16,8 @@ export class Scene {
   }
 
   initializeMap() {
-    const walls = new Walls(this.context, this.canvas);
-    this.addObjects(walls.objects);
-    const coins = new Coins(this.context, this.canvas);
-    this.addObjects(coins.objects);
+    const walls = new Walls(this);
+    const coins = new Coins(this);
   }
 
   start(actionListener) {
