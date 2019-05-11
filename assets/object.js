@@ -1,8 +1,10 @@
 'use strict';
 
+import { generateRandomId } from "./utils.js";
+
 export class Object {
   constructor(x, y, width, height, context, color = 'black', rotation = 0) {
-    this.id = Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+    this.id = generateRandomId();
     this.x = x;
     this.y = y;
     this.width = width;

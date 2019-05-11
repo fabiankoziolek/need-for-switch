@@ -1,6 +1,7 @@
 'use strict';
 
 import { Object } from "./object.js";
+import { isNullOrUndefined } from "./utils.js";
 
 export class ColliderObject extends Object {
   constructor(x, y, width, height, context, objects, color, rotation) {
@@ -8,22 +9,52 @@ export class ColliderObject extends Object {
     this.objects = objects;
   }
 
-  isCollidingOne(collider1, collider2) {
-    return (collider1.x < collider2.x + collider2.width &&
-      collider1.x + collider1.width > collider2.x &&
-      collider1.y < collider2.y + collider2.height &&
-      collider1.height + collider1.y > collider2.y);
+  collidingOne(from, to) {
+    if (from.x < to.x + to.width &&
+      from.x + from.width > to.x &&
+      from.y < to.y + to.height &&
+      from.height + from.y > to.y) {
+      return to;
+    }
+
+    return null;
   }
 
-  isCollidingOneWithSelf(collider) {
-    return this.isCollidingOne(this, collider)
+  collidingOneWithSelf(to) {
+    return this.collidingOne(this, to);
   }
 
-  isCollidingMany(collider, colliders) {
+  isCollidingOne(from, to) {
+    return this.collidingOne(from, to) !== null
+  }
+
+  isCollidingOneWithSelf(to) {
+    return this.isCollidingOne(this, to)
+  }
+
+  collidingMany(from, colliders) {
+    const collisionWith = [];
+
+    for (let i = 0; i < colliders.length; i++) {
+      const collision = this.collidingOne(from, colliders[i]);
+
+      if (!isNullOrUndefined(collision)) {
+        collisionWith.push(colliders[i]);
+      }
+    }
+
+    return collisionWith;
+  }
+
+  collidingManyWithSelf(colliders) {
+    return this.collidingMany(this, colliders);
+  }
+
+  isCollidingMany(from, colliders) {
     let isColliding = false;
 
     for (let i = 0; i < colliders.length; i++) {
-      if (this.isCollidingOne(collider, colliders[i])) {
+      if (this.isCollidingOne(from, colliders[i])) {
         isColliding = true;
         break;
       }
@@ -34,6 +65,15 @@ export class ColliderObject extends Object {
 
   isCollidingManyWithSelf(colliders) {
     return this.isCollidingMany(this, colliders);
+  }
+
+  collidingAll(collider) {
+    const collidingObjectsWithoutSelf = this.objects.filter(x => x.id !== collider.id && x instanceof ColliderObject);
+    return this.collidingMany(collider, collidingObjectsWithoutSelf);
+  }
+
+  collidingAllWithSelf() {
+    return this.collidingAll(this);
   }
 
   isCollidingAll(collider) {

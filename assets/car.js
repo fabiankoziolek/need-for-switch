@@ -1,6 +1,8 @@
 'use strict';
 
 import { ColliderObject } from "./collider-object.js";
+import { Coin } from "./coin.js";
+import { removeItemByValue } from "./utils.js";
 
 export class Car extends ColliderObject {
   constructor(x, y, context, objects, color) {
@@ -85,6 +87,15 @@ export class Car extends ColliderObject {
       } else {
         this.speed *= this.speedDecay;
       }
+    }
+
+    const coinsObjects = this.objects.filter(x => x instanceof Coin);
+    const collidingCoins = this.collidingManyWithSelf(coinsObjects);
+
+    for (let i = 0; i < collidingCoins.length; i++) {
+      // TODO: hide instead of removing instantly. Then add a scheduler to remove hidden
+      removeItemByValue(this.objects, collidingCoins[i]);
+      // TODO: add to score
     }
 
     const axis = this._getAxis();
