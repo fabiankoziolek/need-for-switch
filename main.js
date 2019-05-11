@@ -6,6 +6,7 @@ import { ColliderObject } from "./assets/collider-object.js";
 import { Coin } from "./assets/coin.js";
 import { Hud } from "./assets/hud.js";
 import { Player } from "./assets/player.js";
+import { Game } from "./assets/game.js";
 
 const scene = new Scene(800, 800);
 
@@ -14,7 +15,9 @@ const players = [
   new Player('#287ee8'),
 ];
 
-const hud = new Hud(players, scene.context);
+const game = new Game(players, 15);
+
+const hud = new Hud(game, scene.context);
 scene.objects.push(hud);
 
 const wallTop = new ColliderObject(10, 10, scene.canvas.width - 20, 10, scene.context);
@@ -38,6 +41,7 @@ scene.objects.push(car1);
 const car2 = new Car(600, 500, scene.context, scene.objects, players[1]);
 scene.objects.push(car2);
 
+game.start();
 scene.start(() => {
   setControls(car1, scene, 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown');
   setControls(car2, scene, 'a', 'd', 'w', 's');

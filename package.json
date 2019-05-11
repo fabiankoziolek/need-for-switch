@@ -2,7 +2,7 @@
   "name": "need-for-switch",
   "version": "1.0.0",
   "description": "",
-  "main": "game.js",
+  "main": "main.js",
   "scripts": {
     "start": "live-server"
   },
