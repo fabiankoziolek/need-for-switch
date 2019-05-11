@@ -1,6 +1,6 @@
 'use strict';
 
-import { generateRandomId } from "./utils.js";
+import { generateRandomId } from './utils.js';
 
 export class Object {
   constructor(x, y, width, height, context, color = 'black', rotation = 0) {

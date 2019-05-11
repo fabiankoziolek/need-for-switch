@@ -1,6 +1,6 @@
 'use strict';
 
-import { Object } from "./object.js";
+import { Object } from './object.js';
 
 export class Coin extends Object {
   constructor(x, y, context) {
@@ -22,18 +22,18 @@ export class Coin extends Object {
     this.context.lineWidth = 1;
     this.context.strokeStyle = '#919191';
     this.context.stroke();
-    this.context.font = "14px Arial";
-    this.context.fillStyle = "#fff";
-    this.context.fillText("$", x + (this.width / 2) - 4, y + (this.width / 2) + 5);
+    this.context.font = '14px Arial';
+    this.context.fillStyle = '#fff';
+    this.context.fillText('$', x + (this.width / 2) - 4, y + (this.width / 2) + 5);
   }
 
   _getColor() {
     if (this.animationProgress < 20) {
-      return "#5ba944";
+      return '#5ba944';
     } else if (this.animationProgress < 40) {
-      return "#61bd4e";
+      return '#61bd4e';
     } else {
-      return "#65c951";
+      return '#65c951';
     }
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-import { Object } from "./object.js";
-import { isNullOrUndefined } from "./utils.js";
+import { Object } from './object.js';
+import { isNullOrUndefined } from './utils.js';
 
 export class ColliderObject extends Object {
   constructor(x, y, width, height, context, objects, color, rotation) {

@@ -1,5 +1,8 @@
 'use strict';
 
+import { Walls } from "./walls.js";
+import { Coins } from "./coins.js";
+
 export class Scene {
   constructor(width, height) {
     this.canvas = document.createElement('canvas');
@@ -8,22 +11,15 @@ export class Scene {
     this.canvas.style.border = '1px solid black';
     this.context = this.canvas.getContext('2d');
     this.objects = [];
-    this.pressedKeys = {
-      ArrowLeft: false,
-      ArrowRight: false,
-      ArrowUp: false,
-      ArrowDown: false,
-    };
 
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+  }
 
-    window.addEventListener('keydown', (down) => {
-      this.pressedKeys[down.key] = true;
-    });
-
-    window.addEventListener('keyup', (up) => {
-      this.pressedKeys[up.key] = false;
-    });
+  initializeMap() {
+    const walls = new Walls(this.context, this.canvas);
+    this.addObjects(walls.objects);
+    const coins = new Coins(this.context, this.canvas);
+    this.addObjects(coins.objects);
   }
 
   start(actionListener) {
@@ -39,6 +35,16 @@ export class Scene {
     this.context.save();
     this._draw();
     this.context.restore();
+  }
+
+  addObject(object) {
+    this.objects.push(object);
+  }
+
+  addObjects(objects) {
+    for (let i = 0; i < objects.length; i++) {
+      this.addObject(objects[i]);
+    }
   }
 
   stop() {

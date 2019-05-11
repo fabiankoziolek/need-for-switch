@@ -1,8 +1,8 @@
 'use strict';
 
-import { ColliderObject } from "./collider-object.js";
-import { Coin } from "./coin.js";
-import { removeItemByValue } from "./utils.js";
+import { ColliderObject } from './collider-object.js';
+import { Coin } from './coin.js';
+import { removeItemByValue } from './utils.js';
 
 export class Car extends ColliderObject {
   constructor(x, y, context, objects, player) {
@@ -76,6 +76,28 @@ export class Car extends ColliderObject {
     }
   }
 
+  control(pressedKeys, leftKey, rightKey, accelerateKey, decelerateKey) {
+    if (pressedKeys[leftKey]) {
+      this.steerLeft();
+    } else {
+      this.stopSteerLeft();
+    }
+
+    if (pressedKeys[rightKey]) {
+      this.steerRight();
+    } else {
+      this.stopSteerRight();
+    }
+
+    if (pressedKeys[accelerateKey]) {
+      this.accelerate();
+    }
+
+    if (pressedKeys[decelerateKey]) {
+      this.decelerate();
+    }
+  }
+
   update() {
     const collidingObjectsWithoutSelfAndCars =
       this.objects.filter(x => !(x instanceof Car) && (x instanceof ColliderObject));
@@ -123,7 +145,7 @@ export class Car extends ColliderObject {
   }
 
   _drawWheels(x, y) {
-    this.context.fillStyle = "#000";
+    this.context.fillStyle = '#000';
     if (this.steeringRight) {
       this.context.rotate(40 * (Math.PI / 180));
       this.context.fillRect(x - 7, y + 20, 2, 8);
@@ -149,41 +171,19 @@ export class Car extends ColliderObject {
     this.context.fillRect(x + 12, y + 1, 8, 4);
     this.context.rotate(-20 * (Math.PI / 180));
     if (this.isReturning()) {
-      this.context.fillStyle = "rgba(255, 255, 255, 0.9)";
+      this.context.fillStyle = 'rgba(255, 255, 255, 0.9)';
     } else {
-      this.context.fillStyle = "rgba(255, 255, 255, 0.6)";
+      this.context.fillStyle = 'rgba(255, 255, 255, 0.6)';
     }
     this.context.fillRect(x + 3, y + 45, 6, 3);
     this.context.fillRect(x + 20, y + 45, 6, 3);
   }
 
   _drawWindows(x, y) {
-    this.context.fillStyle = "rgba(255, 255, 255, 0.9)";
+    this.context.fillStyle = 'rgba(255, 255, 255, 0.9)';
     this.context.fillRect(x + 2, y + 15, this.width - 4, 8);
     this.context.fillRect(x + 2, y + 35, this.width - 4, 6);
-    this.context.fillStyle = "rgba(0, 0, 0, 0.1)";
+    this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
     this.context.fillRect(x + 2, y + 23, this.width - 4, 12);
-  }
-}
-
-export function setControls(car, scene, leftKey, rightKey, accelerateKey, decelerateKey) {
-  if (scene.pressedKeys[leftKey]) {
-    car.steerLeft();
-  } else {
-    car.stopSteerLeft();
-  }
-
-  if (scene.pressedKeys[rightKey]) {
-    car.steerRight();
-  } else {
-    car.stopSteerRight();
-  }
-
-  if (scene.pressedKeys[accelerateKey]) {
-    car.accelerate();
-  }
-
-  if (scene.pressedKeys[decelerateKey]) {
-    car.decelerate();
   }
 }

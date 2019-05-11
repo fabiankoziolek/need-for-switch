@@ -1,10 +1,11 @@
 'use strict';
 
-import { generateRandomId } from "./utils.js";
+import { generateRandomId } from './utils.js';
 
 export class Player {
-  constructor(color) {
+  constructor(name, color) {
     this.id = generateRandomId();
+    this.name = name;
     this.color = color;
     this.score = 0;
   }
