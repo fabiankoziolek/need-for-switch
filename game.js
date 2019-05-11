@@ -5,20 +5,13 @@ import { Car, setControls } from './assets/car.js'
 import { ColliderObject } from "./assets/collider-object.js";
 import { Coin } from "./assets/coin.js";
 import { Hud } from "./assets/hud.js";
-import { generateRandomId } from "./assets/utils.js";
+import { Player } from "./assets/player.js";
 
 const scene = new Scene(800, 800);
+
 const players = [
-  {
-    id: generateRandomId(),
-    color: '#eb0019',
-    score: 0,
-  },
-  {
-    id: generateRandomId(),
-    color: '#287ee8',
-    score: 0,
-  }
+  new Player('#eb0019'),
+  new Player('#287ee8'),
 ];
 
 const hud = new Hud(players, scene.context);

@@ -9,19 +9,6 @@ export class Hud extends Object {
     this.players = players;
   }
 
-  getPlayer(playerId) {
-    return this.players.find(x => x.id === playerId);
-  }
-
-  incrementPlayerScore(playerId) {
-    const player = this.getPlayer(playerId);
-    const index = from.indexOf(score);
-
-    if (index > -1) {
-      this.players[index].score = this.players[index].score++;
-    }
-  }
-
   _draw(x, y) {
     this._drawTimer(x, y);
     this.context.font = "40px Arial";

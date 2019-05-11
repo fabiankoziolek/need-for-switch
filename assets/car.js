@@ -96,7 +96,7 @@ export class Car extends ColliderObject {
     for (let i = 0; i < collidingCoins.length; i++) {
       // TODO: hide instead of removing instantly. Then add a scheduler to remove hidden
       removeItemByValue(this.objects, collidingCoins[i]);
-      this.player.score = this.player.score + 1;
+      this.player.incrementScore();
     }
 
     const axis = this._getAxis();
