@@ -15,9 +15,9 @@ const game = new Game([
 game.initializeHud();
 scene.initializeMap();
 
-const carOne = new Car(150, 500, scene.context, scene.objects, game.players[0]);
+const carOne = new Car(600, 500, scene.context, scene.objects, game.players[0]);
 scene.addObject(carOne);
-const carTwo = new Car(600, 500, scene.context, scene.objects, game.players[1]);
+const carTwo = new Car(150, 500, scene.context, scene.objects, game.players[1]);
 scene.addObject(carTwo);
 
 game.start(() => {
